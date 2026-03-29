@@ -1,0 +1,20 @@
+name: Android Build
+
+on:
+  push:
+    branches:
+      - main  # workflow запускается только при пуше в main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3   # скачиваем твой проект
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "stable"  # ставим Flutter
+
+      - run: flutter pub get          # получаем пакеты
+      - run: flutter build apk --release  # собираем APK
